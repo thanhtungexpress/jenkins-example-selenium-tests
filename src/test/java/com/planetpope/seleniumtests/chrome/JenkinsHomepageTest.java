@@ -1,19 +1,15 @@
-package com.planetpope.seleniumtests;
+package com.planetpope.seleniumtests.chrome;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
+import com.planetpope.seleniumtests.abstracts.AbstractJenkinsHomepage;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class JenkinsHomepageTest {
-  WebDriver driver;
-  
+public class JenkinsHomepageTest extends AbstractJenkinsHomepage {
   @BeforeAll
   static void setupClass() {
     WebDriverManager.chromedriver().setup();
@@ -24,18 +20,5 @@ public class JenkinsHomepageTest {
     ChromeOptions options = new ChromeOptions();
     options.addArguments("--headless");
     driver = new ChromeDriver(options);
-  }
-
-  @AfterEach
-  void teardown() {
-    if (driver != null) {
-        driver.quit();
-    }
-  }
-
-  @Test
-  void test() {
-    driver.get("https://www.jenkins.io/");
-    Assertions.assertEquals("Jenkins", driver.getTitle());
   }
 }
